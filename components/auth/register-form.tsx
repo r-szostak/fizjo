@@ -19,9 +19,11 @@ import { FormError } from "../form-error"
 import { useTransition } from "react"
 import { toast } from "sonner"
 import { register } from "@/actions/auth/register"
+import { redirect, useRouter } from "next/navigation"
 
 export const RegisterForm = () => {
   const [isPending, startTransition] = useTransition()
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
@@ -35,10 +37,11 @@ export const RegisterForm = () => {
   const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
     startTransition(() => {
       register(values).then((data) => {
-        if (data.error) {
+        if (data?.error) {
           toast.error(data.error)
         } else {
           toast.success(data.success)
+          router.push(`/auth/login`)
         }
       })
     })
