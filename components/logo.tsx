@@ -1,11 +1,16 @@
 import Image from "next/image"
 import Link from "next/link"
 
-export const Logo = () => {
+interface LogoProps {
+  height: number
+  width: number
+}
+
+export const Logo = ({ height, width }: LogoProps) => {
   return (
     <Link href="/">
-      <div className="hover:opacity-75 transition items-center gap-x-2 hidden md:flex">
-        <Image src="/logo-green.png" alt="Logo" height={140} width={140} />
+      <div className="hover:opacity-75 transition items-center ">
+        <Image src="/logo-green.png" alt="Logo" height={height} width={width} />
       </div>
     </Link>
   )

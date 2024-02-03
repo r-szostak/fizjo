@@ -1,4 +1,4 @@
-import NextAuth from "next-auth"
+import NextAuth, { Session } from "next-auth"
 import authConfig from "./auth.config"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import { db } from "./lib/db"
@@ -18,7 +18,7 @@ export const {
 
       if (session.user) {
         session.user.name = token.name
-        session.user.login = token.login
+        session.user.login = token.login as string
       }
 
       return session

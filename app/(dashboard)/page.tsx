@@ -1,6 +1,6 @@
 import { auth, signOut } from "@/auth"
 
-export default async function Home() {
+const DashboardPage = async () => {
   const session = await auth()
 
   const onSignOut = async () => {
@@ -9,14 +9,16 @@ export default async function Home() {
     await signOut()
   }
   return (
-    <main className="flex h-full flex-col items-center justify-center bg-[#f1f5f7]">
+    <div className="flex h-full flex-col items-center justify-center bg-[#f1f5f7] rounded-3xl">
       <div className="space-y-6 text-center bg-white text-[#0b2f2c]">
         <h1 className="text-6xl font-semibold  drop-shadow-md">Fizjo</h1>
         <p className=" text-lg">{JSON.stringify(session)}</p>
         <form action={onSignOut}>
-          <button type="submit">Sign Out</button>
+          <button type="submit">Sign Out from dash</button>
         </form>
       </div>
-    </main>
+    </div>
   )
 }
+
+export default DashboardPage
