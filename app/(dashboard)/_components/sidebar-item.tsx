@@ -25,7 +25,7 @@ export const SidebarItem = ({ icon, label, href }: SidebarItemProps) => {
         variant="ghost"
         onClick={onClick}
         className={cn(
-          "rounded-none w-full py-8 text-gray-500 hover:text-[#25c0b7]",
+          "rounded-none w-full py-10 text-gray-500 hover:text-[#25c0b7]",
           isActive && "border-r-[#25c0b7] border-r-4 text-[#25c0b7]"
         )}
       >
