@@ -19,9 +19,9 @@ interface NavbarProps {
 
 export const Navbar = ({ user }: NavbarProps) => {
   return (
-    <nav className="flex justify-between items-center h-full p-10 mx-20">
+    <nav className="flex justify-between items-center h-full p-10 max-w-screen-2xl mx-auto">
       <p className=" font-semibold text-3xl basis-3/5">
-        Cześć <span className="text-[#46a4a2]">{user?.name}!</span>
+        Cześć<span className="text-[#46a4a2] ml-3">{user?.name}!</span>
       </p>
       <div className="flex gap-x-2 items-center">
         <Calendar className="w-5 h-5 text-[#2c413e]" />

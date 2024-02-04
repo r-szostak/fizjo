@@ -12,7 +12,7 @@ interface UserOptionsProps {
   user?: ExtendedUser
 }
 
-export const UserOptions = ({ user }: UserOptionsProps) => {
+export const UserOptions = async ({ user }: UserOptionsProps) => {
   const onSignOut = async () => {
     "use server"
     await signOut()
@@ -36,7 +36,6 @@ export const UserOptions = ({ user }: UserOptionsProps) => {
           <Button
             className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm"
             variant={"ghost"}
-            onClick={onSignOut}
             type="submit"
           >
             Wyloguj

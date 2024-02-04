@@ -1,3 +1,5 @@
+"use client"
+
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import {
@@ -5,8 +7,10 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { usePatientModal } from "@/hooks/use-patient-modal"
 
 export const UserActions = ({ children }: { children: React.ReactNode }) => {
+  const patientModal = usePatientModal()
   return (
     <Popover>
       <PopoverTrigger>{children}</PopoverTrigger>
@@ -20,6 +24,7 @@ export const UserActions = ({ children }: { children: React.ReactNode }) => {
           className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm"
           variant={"ghost"}
           type="submit"
+          onClick={patientModal.onOpen}
         >
           Dodaj pacjenta
         </Button>

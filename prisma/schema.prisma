@@ -16,6 +16,7 @@ model User {
   login    String    @unique
   password String
   accounts Account[]
+  Patient  Patient[]
 }
 
 model Account {
@@ -35,4 +36,21 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+}
+
+model Patient {
+  id        String   @id @default(uuid())
+  firstName String
+  lastName  String
+  birthDate DateTime
+  sex       SEX
+  phone     String?
+  email     String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+enum SEX {
+  male
+  female
 }

@@ -20,17 +20,18 @@ export const SidebarItem = ({ icon, label, href }: SidebarItemProps) => {
     router.push(href)
   }
   return (
-    <Hint sideOffset={-80} side="right" description={label}>
-      <Button
-        variant="ghost"
+    <Hint sideOffset={-60} side="right" description={label}>
+      <div
+        role="button"
         onClick={onClick}
         className={cn(
-          "rounded-none w-full py-10 text-gray-500 hover:text-[#25c0b7]",
-          isActive && "border-r-[#25c0b7] border-r-4 text-[#25c0b7]"
+          "rounded-none w-full py-7 text-gray-500 hover:text-[#25c0b7] hover:bg-accent inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+          isActive &&
+            "border-r-[#25c0b7] border-r-4 text-[#25c0b7]  hover:text-[#25c0b7]"
         )}
       >
         {icon}
-      </Button>
+      </div>
     </Hint>
   )
 }
