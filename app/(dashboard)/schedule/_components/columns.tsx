@@ -1,49 +1,132 @@
 "use client"
-import { Button } from "@/components/ui/button"
-import { Patient } from "@prisma/client"
+
 import { ColumnDef } from "@tanstack/react-table"
-import { format } from "date-fns"
-import { pl } from "date-fns/locale"
-import Link from "next/link"
+import { WorkingHours } from "./working-hours"
+import { ScheduleColumnsData } from "./columns-data"
 
-export const columns: ColumnDef<Patient>[] = [
+export const columns: ColumnDef<ScheduleColumnsData>[] = [
   {
-    accessorKey: "lastName",
-    header: "Imię i Nazwisko",
-    cell: ({ row }) => {
-      const firstName = row.original.firstName
-      const lastName = row.getValue("lastName")
-
-      return <p className="font-bold">{`${firstName} ${lastName}`}</p>
-    },
-  },
-
-  {
-    accessorKey: "birthDate",
-    header: "Data Urodzenia",
-    cell: ({ row }) => {
-      const date = new Date(row.getValue("birthDate"))
-
-      return <p>{format(date, "do MMMM yyyy", { locale: pl })}</p>
-    },
-  },
-  {
-    accessorKey: "phone",
-    header: "Telefon",
-  },
-  {
-    accessorKey: "id",
+    accessorKey: "hour",
     header: "",
     cell: ({ row }) => {
-      const id = row.getValue("id")
+      const hour = row.original.hour
       return (
-        <div className="text-right">
-          <Link href={`/patients/${id}`}>
-            <Button className="bg-[#a6ccca]/15 shadow-none px-10 py-7  font-semibold text-[#058678] hover:text-white">
-              Karta pacjenta
-            </Button>
-          </Link>
-        </div>
+        <p className="w-full h-16 relative -bottom-8 -left-2 flex items-center justify-center border-l">
+          {(hour !== 23 && hour) || hour === 0 ? `${hour + 1}:00` : null}
+        </p>
+      )
+    },
+  },
+  {
+    header: "Poniedziałek",
+    accessorKey: "monday",
+    cell: ({ row }) => {
+      const startHour = row.original.startHour.monday
+      const endHour = row.original.endHour.monday
+      const actualHour = row.original.monday
+      return (
+        <WorkingHours
+          startHour={startHour}
+          endHour={endHour}
+          actualHour={actualHour}
+        />
+      )
+    },
+  },
+
+  {
+    accessorKey: "tuesday",
+    header: "Wtorek",
+    cell: ({ row }) => {
+      const startHour = row.original.startHour.tuesday
+      const endHour = row.original.endHour.tuesday
+      const actualHour = row.original.tuesday
+      return (
+        <WorkingHours
+          startHour={startHour}
+          endHour={endHour}
+          actualHour={actualHour}
+        />
+      )
+    },
+  },
+  {
+    accessorKey: "wednesday",
+    header: "Środa",
+    cell: ({ row }) => {
+      const startHour = row.original.startHour.wednesday
+      const endHour = row.original.endHour.wednesday
+      const actualHour = row.original.wednesday
+      return (
+        <WorkingHours
+          startHour={startHour}
+          endHour={endHour}
+          actualHour={actualHour}
+        />
+      )
+    },
+  },
+  {
+    accessorKey: "thursday",
+    header: "Czwartek",
+    cell: ({ row }) => {
+      const startHour = row.original.startHour.thursday
+      const endHour = row.original.endHour.thursday
+      const actualHour = row.original.thursday
+      return (
+        <WorkingHours
+          startHour={startHour}
+          endHour={endHour}
+          actualHour={actualHour}
+        />
+      )
+    },
+  },
+  {
+    accessorKey: "friday",
+    header: "Piątek",
+    cell: ({ row }) => {
+      const startHour = row.original.startHour.friday
+      const endHour = row.original.endHour.friday
+      const actualHour = row.original.friday
+      return (
+        <WorkingHours
+          startHour={startHour}
+          endHour={endHour}
+          actualHour={actualHour}
+        />
+      )
+    },
+  },
+  {
+    accessorKey: "saturday",
+    header: "Sobota",
+    cell: ({ row }) => {
+      const startHour = row.original.startHour.saturday
+      const endHour = row.original.endHour.saturday
+      const actualHour = row.original.saturday
+      return (
+        <WorkingHours
+          startHour={startHour}
+          endHour={endHour}
+          actualHour={actualHour}
+        />
+      )
+    },
+  },
+  {
+    accessorKey: "sunday",
+    header: "Niedziela",
+    cell: ({ row }) => {
+      const startHour = row.original.startHour.sunday
+      const endHour = row.original.endHour.sunday
+      const actualHour = row.original.sunday
+      return (
+        <WorkingHours
+          startHour={startHour}
+          endHour={endHour}
+          actualHour={actualHour}
+        />
       )
     },
   },
