@@ -58,7 +58,7 @@ export const CreatePatientForm = () => {
           toast.success(
             `Pacjent ${data.patient?.firstName} ${data.patient?.lastName} został pomyślnie dodany!`
           )
-          router.push(`/patients/${data.patient?.id}`)
+          router.push(`/patients/`)
         }
       })
     })

@@ -4,6 +4,7 @@ import { currentUser } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { getUserById } from "@/lib/user"
 import { PatientSchema } from "@/schemas/patient-schema"
+import { revalidatePath } from "next/cache"
 import { z } from "zod"
 
 export const createPatient = async (values: z.infer<typeof PatientSchema>) => {
@@ -42,7 +43,7 @@ export const createPatient = async (values: z.infer<typeof PatientSchema>) => {
         phone,
       },
     })
-
+    revalidatePath("/patients")
     return { patient }
   } catch (error) {
     return { error: "Nie udało się utworzyć pacjenta!" }

@@ -5,7 +5,6 @@ import { ColumnDef } from "@tanstack/react-table"
 import { format } from "date-fns"
 import { pl } from "date-fns/locale"
 import Link from "next/link"
-import { redirect } from "next/navigation"
 
 export const columns: ColumnDef<Patient>[] = [
   {

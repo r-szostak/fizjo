@@ -7,11 +7,11 @@ import { columns } from "./_components/columns"
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 
 const PatientsPage = async () => {
   const user = await currentUser()
@@ -24,16 +24,18 @@ const PatientsPage = async () => {
     where: {
       userId: user.id,
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   })
 
-  console.log(patients)
   return (
-    <Card className="max-w-screen-2xl mx-auto">
-      <CardHeader>
-        <CardTitle>Card Title</CardTitle>
-        <CardDescription>Card Description</CardDescription>
+    <Card className="max-w-screen-xl mx-auto">
+      <CardHeader className="flex flex-row items-center justify-between">
+        <CardTitle className="text-2xl ">Pacjenci</CardTitle>
+        <Button size="big">Dodaj pacjenta</Button>
       </CardHeader>
-      <CardContent>
+      <CardContent className="px-0">
         <DataTable columns={columns} data={patients} />
       </CardContent>
       <CardFooter>
