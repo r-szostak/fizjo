@@ -1,3 +1,11 @@
+import { DayOfWeek, WorkingHours } from "@prisma/client"
+
+export interface WorkingInterval {
+  startHour: number
+  endHour: number
+  id: string
+}
+
 export interface ScheduleColumnsData {
   hour?: number
   monday: number
@@ -7,41 +15,45 @@ export interface ScheduleColumnsData {
   friday: number
   saturday: number
   sunday: number
-  startHour: { [key: string]: number }
-  endHour: { [key: string]: number }
+  workingHours: {
+    [key in DayOfWeek]: WorkingInterval[]
+  }
 }
 
-export const generateColumnsData = () => {
-  const startHours = 8 // Replace with the desired start hour for each day
-  const endHours = 18 // Replace with the desired end hour for each day
-  const data: ScheduleColumnsData[] = Array.from({ length: 24 }, (_, hour) => ({
-    hour,
-    monday: hour,
-    tuesday: hour,
-    wednesday: hour,
-    thursday: hour,
-    friday: hour,
-    saturday: hour,
-    sunday: hour,
-    startHour: {
-      monday: startHours,
-      tuesday: startHours,
-      wednesday: startHours,
-      thursday: 0,
-      friday: startHours,
-      saturday: startHours,
-      sunday: startHours,
-    },
-    endHour: {
-      monday: endHours,
-      tuesday: endHours,
-      wednesday: endHours,
-      thursday: 24,
-      friday: endHours,
-      saturday: endHours,
-      sunday: endHours,
-    },
-  }))
+export const generateColumnsData = (workingHours: WorkingHours[]) => {
+  const data: ScheduleColumnsData[] = Array.from({ length: 24 }, (_, hour) => {
+    const dayData: ScheduleColumnsData = {
+      hour,
+      monday: hour,
+      tuesday: hour,
+      wednesday: hour,
+      thursday: hour,
+      friday: hour,
+      saturday: hour,
+      sunday: hour,
+      workingHours: {
+        MONDAY: [],
+        TUESDAY: [],
+        WEDNESDAY: [],
+        THURSDAY: [],
+        FRIDAY: [],
+        SATURDAY: [],
+        SUNDAY: [],
+      },
+    }
+
+    workingHours.forEach((wh) => {
+      const dayOfWeekLower = wh.dayOfWeek
+
+      dayData.workingHours[dayOfWeekLower].push({
+        startHour: parseInt(wh.startHour),
+        endHour: parseInt(wh.endHour),
+        id: wh.id
+      })
+    })
+
+    return dayData
+  })
 
   return data
 }

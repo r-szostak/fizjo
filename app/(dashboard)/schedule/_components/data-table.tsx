@@ -38,7 +38,7 @@ export function DataTable<TData, TValue>({
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow
               key={headerGroup.id}
-              className="hover:bg-slate-500/10 bg-slate-100 "
+              className="hover:bg-slate-200 bg-slate-100 "
             >
               {headerGroup.headers.map((header) => {
                 return (
@@ -64,7 +64,7 @@ export function DataTable<TData, TValue>({
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
-                className=" text-sm h-16 border-none last:border-b last:border-b-slate-100 hover:bg-transparent"
+                className=" text-sm h-11 border-none last:border-b last:border-b-slate-100 hover:bg-transparent"
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell

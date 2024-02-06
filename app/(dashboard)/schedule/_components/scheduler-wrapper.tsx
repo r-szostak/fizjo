@@ -8,9 +8,25 @@ import {
 import { DataTable } from "./data-table"
 import { columns } from "./columns"
 import { generateColumnsData } from "./columns-data"
+import { currentUser } from "@/lib/auth"
+import { redirect } from "next/navigation"
+import { db } from "@/lib/db"
 
-export const SchedulerWrapper = () => {
-  const data = generateColumnsData()
+export const SchedulerWrapper = async () => {
+  const user = await currentUser()
+
+  if (!user) {
+    redirect("/auth/login")
+  }
+
+  const workingHours = await db.workingHours.findMany({
+    where: {
+      userId: user.id,
+    },
+  })
+  console.log(workingHours)
+  const data = generateColumnsData(workingHours)
+  console.log(data)
   return (
     <Card className="max-w-screen-xl mx-auto">
       <CardHeader className="flex flex-row items-center justify-between">
@@ -19,9 +35,6 @@ export const SchedulerWrapper = () => {
       <CardContent className="px-0">
         <DataTable columns={columns} data={data} />
       </CardContent>
-      <CardFooter>
-        <p>Card Footer</p>
-      </CardFooter>
     </Card>
   )
 }

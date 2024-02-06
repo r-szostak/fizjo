@@ -3,6 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { WorkingHours } from "./working-hours"
 import { ScheduleColumnsData } from "./columns-data"
+import { DayOfWeek } from "@prisma/client"
 
 export const columns: ColumnDef<ScheduleColumnsData>[] = [
   {
@@ -11,7 +12,7 @@ export const columns: ColumnDef<ScheduleColumnsData>[] = [
     cell: ({ row }) => {
       const hour = row.original.hour
       return (
-        <p className="w-full h-16 relative -bottom-8 -left-2 flex items-center justify-center border-l">
+        <p className="w-full h-11 relative -bottom-[1.6rem] -left-0 flex items-center justify-center border-l text-xs font-medium text-neutral-500">
           {(hour !== 23 && hour) || hour === 0 ? `${hour + 1}:00` : null}
         </p>
       )
@@ -21,14 +22,14 @@ export const columns: ColumnDef<ScheduleColumnsData>[] = [
     header: "Poniedziałek",
     accessorKey: "monday",
     cell: ({ row }) => {
-      const startHour = row.original.startHour.monday
-      const endHour = row.original.endHour.monday
-      const actualHour = row.original.monday
+      const workingHours = row.original.workingHours
+      const currentHour = row.original.monday
+      const currentDay = DayOfWeek.MONDAY
       return (
         <WorkingHours
-          startHour={startHour}
-          endHour={endHour}
-          actualHour={actualHour}
+          workingHours={workingHours}
+          currentHour={currentHour}
+          currentDay={currentDay}
         />
       )
     },
@@ -38,14 +39,14 @@ export const columns: ColumnDef<ScheduleColumnsData>[] = [
     accessorKey: "tuesday",
     header: "Wtorek",
     cell: ({ row }) => {
-      const startHour = row.original.startHour.tuesday
-      const endHour = row.original.endHour.tuesday
-      const actualHour = row.original.tuesday
+      const workingHours = row.original.workingHours
+      const currentHour = row.original.tuesday
+      const currentDay = DayOfWeek.TUESDAY
       return (
         <WorkingHours
-          startHour={startHour}
-          endHour={endHour}
-          actualHour={actualHour}
+          workingHours={workingHours}
+          currentHour={currentHour}
+          currentDay={currentDay}
         />
       )
     },
@@ -54,14 +55,14 @@ export const columns: ColumnDef<ScheduleColumnsData>[] = [
     accessorKey: "wednesday",
     header: "Środa",
     cell: ({ row }) => {
-      const startHour = row.original.startHour.wednesday
-      const endHour = row.original.endHour.wednesday
-      const actualHour = row.original.wednesday
+      const workingHours = row.original.workingHours
+      const currentHour = row.original.wednesday
+      const currentDay = DayOfWeek.WEDNESDAY
       return (
         <WorkingHours
-          startHour={startHour}
-          endHour={endHour}
-          actualHour={actualHour}
+          workingHours={workingHours}
+          currentHour={currentHour}
+          currentDay={currentDay}
         />
       )
     },
@@ -70,14 +71,14 @@ export const columns: ColumnDef<ScheduleColumnsData>[] = [
     accessorKey: "thursday",
     header: "Czwartek",
     cell: ({ row }) => {
-      const startHour = row.original.startHour.thursday
-      const endHour = row.original.endHour.thursday
-      const actualHour = row.original.thursday
+      const workingHours = row.original.workingHours
+      const currentHour = row.original.thursday
+      const currentDay = DayOfWeek.THURSDAY
       return (
         <WorkingHours
-          startHour={startHour}
-          endHour={endHour}
-          actualHour={actualHour}
+          workingHours={workingHours}
+          currentHour={currentHour}
+          currentDay={currentDay}
         />
       )
     },
@@ -86,14 +87,14 @@ export const columns: ColumnDef<ScheduleColumnsData>[] = [
     accessorKey: "friday",
     header: "Piątek",
     cell: ({ row }) => {
-      const startHour = row.original.startHour.friday
-      const endHour = row.original.endHour.friday
-      const actualHour = row.original.friday
+      const workingHours = row.original.workingHours
+      const currentHour = row.original.friday
+      const currentDay = DayOfWeek.FRIDAY
       return (
         <WorkingHours
-          startHour={startHour}
-          endHour={endHour}
-          actualHour={actualHour}
+          workingHours={workingHours}
+          currentHour={currentHour}
+          currentDay={currentDay}
         />
       )
     },
@@ -102,14 +103,14 @@ export const columns: ColumnDef<ScheduleColumnsData>[] = [
     accessorKey: "saturday",
     header: "Sobota",
     cell: ({ row }) => {
-      const startHour = row.original.startHour.saturday
-      const endHour = row.original.endHour.saturday
-      const actualHour = row.original.saturday
+      const workingHours = row.original.workingHours
+      const currentHour = row.original.saturday
+      const currentDay = DayOfWeek.SATURDAY
       return (
         <WorkingHours
-          startHour={startHour}
-          endHour={endHour}
-          actualHour={actualHour}
+          workingHours={workingHours}
+          currentHour={currentHour}
+          currentDay={currentDay}
         />
       )
     },
@@ -118,14 +119,14 @@ export const columns: ColumnDef<ScheduleColumnsData>[] = [
     accessorKey: "sunday",
     header: "Niedziela",
     cell: ({ row }) => {
-      const startHour = row.original.startHour.sunday
-      const endHour = row.original.endHour.sunday
-      const actualHour = row.original.sunday
+      const workingHours = row.original.workingHours
+      const currentHour = row.original.sunday
+      const currentDay = DayOfWeek.SUNDAY
       return (
         <WorkingHours
-          startHour={startHour}
-          endHour={endHour}
-          actualHour={actualHour}
+          workingHours={workingHours}
+          currentHour={currentHour}
+          currentDay={currentDay}
         />
       )
     },
