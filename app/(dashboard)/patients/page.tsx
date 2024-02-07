@@ -28,7 +28,6 @@ const PatientsPage = async () => {
       createdAt: "desc",
     },
   })
-  console.log(patients)
 
   return (
     <Card className="max-w-screen-xl mx-auto">

@@ -24,9 +24,9 @@ export const SchedulerWrapper = async () => {
       userId: user.id,
     },
   })
-  console.log(workingHours)
+
   const data = generateColumnsData(workingHours)
-  console.log(data)
+
   return (
     <Card className="max-w-screen-xl mx-auto">
       <CardHeader className="flex flex-row items-center justify-between">

@@ -30,7 +30,6 @@ export const updateSchedule = async (
   if (!validatedFields.success) {
     return { error: "Nieprawidłowe dane!" }
   }
-  console.log(id)
 
   const { endHour, startHour } = validatedFields.data
 

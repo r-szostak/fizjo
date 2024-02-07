@@ -8,7 +8,6 @@ import { revalidatePath } from "next/cache"
 import { z } from "zod"
 
 export const createPatient = async (values: z.infer<typeof PatientSchema>) => {
-  console.log(values)
   const user = await currentUser()
 
   if (!user) {
