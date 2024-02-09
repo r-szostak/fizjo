@@ -6,7 +6,7 @@ import { ModalProvider } from "@/providers/modal-provider"
 import { QueryProvider } from "@/providers/query-provider"
 import { SessionProvider } from "next-auth/react"
 import { auth } from "@/auth"
-const inter = Nunito_Sans({ weight: "400", subsets: ["latin"] })
+const inter = Nunito_Sans({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "Create Next App",

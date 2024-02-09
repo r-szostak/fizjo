@@ -1,12 +1,12 @@
 import { create } from "zustand"
-type VisitModalStore = {
+type AppointmentModalStore = {
   isOpen: boolean
   onOpen: () => void
   onClose: () => void
 }
 
-export const useVisitModal = create<VisitModalStore>((set) => ({
-  isOpen: true,
+export const useAppointmentModal = create<AppointmentModalStore>((set) => ({
+  isOpen: false,
   onOpen: () => set({ isOpen: true }),
   onClose: () => set({ isOpen: false }),
 }))

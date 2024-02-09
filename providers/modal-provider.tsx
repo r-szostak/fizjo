@@ -1,7 +1,7 @@
 "use client"
 
 import { PatientModal } from "@/components/modals/patient-modal/patient-modal"
-import { VisitModal } from "@/components/modals/visit-modal/visit-modal"
+import { AppointmentModal } from "@/components/modals/appointment-modal/appointment-modal"
 import { useEffect, useState } from "react"
 
 export const ModalProvider = () => {
@@ -18,7 +18,7 @@ export const ModalProvider = () => {
   return (
     <>
       <PatientModal />
-      <VisitModal />
+      <AppointmentModal />
     </>
   )
 }
