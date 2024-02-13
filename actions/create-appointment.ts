@@ -35,7 +35,7 @@ export const createAppointment = async (
   try {
     const currentAppointments = await db.appointment.findMany({
       where: {
-        Patient: {
+        patient: {
           userId: user.id,
         },
       },

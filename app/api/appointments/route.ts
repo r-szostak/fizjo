@@ -12,7 +12,7 @@ export async function GET(req: Request) {
 
     const patients = await db.appointment.findMany({
       where: {
-        Patient: {
+        patient: {
           userId: user.id,
         },
       },

@@ -1,6 +1,6 @@
 import { fetcher } from "@/lib/fetcher"
 import { Appointment, Patient, WorkingHours } from "@prisma/client"
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 import {
   Form,
   FormControl,
@@ -83,6 +83,7 @@ export const PatientForm = ({ step, setStep }: PatientFormProps) => {
 
   const appointmentModal = useAppointmentModal()
   const router = useRouter()
+  const queryClient = useQueryClient()
 
   const { data: patients } = useQuery<Patient[]>({
     queryKey: ["patients"],
@@ -108,7 +109,11 @@ export const PatientForm = ({ step, setStep }: PatientFormProps) => {
     resolver: zodResolver(AppointmentSchema),
     defaultValues: {
       patientId: "",
-      date: new Date(),
+      date: new Date(
+        new Date().getFullYear(),
+        new Date().getMonth(),
+        new Date().getDate()
+      ),
     },
   })
 
@@ -118,8 +123,11 @@ export const PatientForm = ({ step, setStep }: PatientFormProps) => {
     form.setValue("hour", hour.toString())
   }
 
-  const onBack = () => setStep((value) => value - 1)
-
+  const onBack = () => {
+    if (step === 0) {
+      appointmentModal.onClose()
+    } else setStep((value) => value - 1)
+  }
   const onNext = () => setStep((value) => value + 1)
 
   const onSubmit = (values: z.infer<typeof AppointmentSchema>) => {
@@ -130,6 +138,9 @@ export const PatientForm = ({ step, setStep }: PatientFormProps) => {
         } else {
           appointmentModal.onClose()
           setStep(0)
+          queryClient.invalidateQueries({
+            queryKey: ["current-appointments"],
+          })
           toast.success(`Wizyta ${data.appointment?.startHour} została dodana`)
           router.push(`/appointments/`)
         }
@@ -192,8 +203,9 @@ export const PatientForm = ({ step, setStep }: PatientFormProps) => {
         <Button
           className="w-full"
           variant="secondary"
-          onClick={() => appointmentModal.onClose()}
+          onClick={onBack}
           size="big"
+          type="button"
         >
           Wstecz
         </Button>
@@ -250,13 +262,19 @@ export const PatientForm = ({ step, setStep }: PatientFormProps) => {
                         selected={field.value}
                         onSelect={(value: Date | undefined) => {
                           field.onChange(value)
+                          const selectedDate = new Date(
+                            value!.getFullYear(),
+                            value!.getMonth(),
+                            value!.getDate()
+                          )
+                          console.log(selectedDate)
                           setSelectedDateTime((prev) => ({
                             ...prev,
-                            date: value!,
+                            date: selectedDate,
                           }))
                           setDateRange({
-                            startDay: value!,
-                            endDay: add(value!, { days: 7 }),
+                            startDay: selectedDate,
+                            endDay: add(selectedDate, { days: 7 }),
                           })
                         }}
                         disabled={(date: Date) => date < new Date()}

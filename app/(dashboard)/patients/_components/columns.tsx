@@ -4,13 +4,24 @@ import { Patient } from "@prisma/client"
 import { ColumnDef } from "@tanstack/react-table"
 import { format } from "date-fns"
 import { pl } from "date-fns/locale"
+import { ArrowUpDown } from "lucide-react"
 import Link from "next/link"
 import { redirect } from "next/navigation"
 
 export const columns: ColumnDef<Patient>[] = [
   {
     accessorKey: "lastName",
-    header: "Imię i Nazwisko",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Imię i nazwisko
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
     cell: ({ row }) => {
       const firstName = row.original.firstName
       const lastName = row.getValue("lastName")

@@ -5,7 +5,7 @@ import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog"
 import { useAppointmentModal } from "@/hooks/use-appointment-modal"
 import { useState } from "react"
 import { Header } from "./header"
-import { PatientForm } from "./patient-form"
+import { PatientForm } from "./multi-step-form"
 
 export const AppointmentModal = () => {
   const [step, setStep] = useState(0)

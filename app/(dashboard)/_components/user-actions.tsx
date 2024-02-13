@@ -32,13 +32,6 @@ export const UserActions = ({ children }: { children: React.ReactNode }) => {
           className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm"
           variant={"ghost"}
           type="submit"
-        >
-          Rozpocznij nową wizytę
-        </Button>
-        <Button
-          className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm"
-          variant={"ghost"}
-          type="submit"
           onClick={appointmentModal.onOpen}
         >
           Zaplanuj wizytę

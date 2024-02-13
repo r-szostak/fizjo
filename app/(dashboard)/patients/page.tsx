@@ -4,13 +4,7 @@ import { redirect } from "next/navigation"
 import React from "react"
 import { DataTable } from "./_components/data-table"
 import { columns } from "./_components/columns"
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 
 const PatientsPage = async () => {
@@ -38,9 +32,6 @@ const PatientsPage = async () => {
       <CardContent className="px-0">
         <DataTable columns={columns} data={patients} />
       </CardContent>
-      <CardFooter>
-        <p>Card Footer</p>
-      </CardFooter>
     </Card>
   )
 }

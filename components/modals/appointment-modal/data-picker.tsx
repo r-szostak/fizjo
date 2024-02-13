@@ -11,7 +11,7 @@ import {
 import { pl } from "date-fns/locale"
 import { ChevronLeftSquare, ChevronRightSquare } from "lucide-react"
 import React from "react"
-import { ISelectedDateTime } from "./patient-form"
+import { ISelectedDateTime } from "./multi-step-form"
 import { cn } from "@/lib/utils"
 
 import { Appointment, WorkingHours } from "@prisma/client"
@@ -52,7 +52,7 @@ export const DataPicker = ({
 
     setSelectedDateTime(selectedDate, hourIndex)
   }
-
+  console.log(currentAppointments)
   return (
     <div className="max-w-xl w-full max-h-80 overflow-y-auto rounded-md border">
       <div className="flex justify-between items-center py-4 px-2 text-sm ">
@@ -110,7 +110,7 @@ export const DataPicker = ({
               const isHourBooked = currentAppointments?.find(
                 (appointment) =>
                   parseInt(appointment.startHour) === hourIndex &&
-                  isEqual(appointment.date, selectedDateTime.date)
+                  isEqual(appointment.date, day)
               )
               if (isWorkingHours && !isHourBooked) {
                 return (

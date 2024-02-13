@@ -16,7 +16,7 @@ model User {
   login        String         @unique
   password     String
   accounts     Account[]
-  Patient      Patient[]
+  patients     Patient[]
   workingHours WorkingHours[]
 }
 
@@ -55,9 +55,10 @@ model Patient {
   userId    String
   user      User     @relation(fields: [userId], references: [id])
 
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
-  Appointments Appointment[]
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+  appointments        Appointment[]
+  cycleOfAppointments CycleOfAppointments[]
 }
 
 enum DayOfWeek {
@@ -82,10 +83,27 @@ model WorkingHours {
 model Appointment {
   id        String   @id @default(uuid())
   date      DateTime
-  Patient   Patient  @relation(fields: [patientId], references: [id])
+  patient   Patient  @relation(fields: [patientId], references: [id])
   patientId String
   startHour String
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt            DateTime             @default(now())
+  updatedAt            DateTime             @updatedAt
+  cycleOfAppointment   CycleOfAppointments? @relation(fields: [cycleOfAppointmentId], references: [id], onDelete: Cascade)
+  cycleOfAppointmentId String?
+}
+
+model CycleOfAppointments {
+  id             String        @id @default(uuid())
+  name           String
+  appointments   Appointment[]
+  icd            String?
+  note           String?       @db.Text
+  medicalHistory String?       @db.Text
+  functionalTest String?       @db.Text
+  icf            String?
+  target         String?       @db.Text
+  diagnosisEnded Boolean       @default(false)
+  patient        Patient       @relation(fields: [patientId], references: [id])
+  patientId      String
 }
